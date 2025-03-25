@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <div>
+        {{#each products}}
+            <div>
+                <h3>{{this.title}}</h3>
+                <p>Precio: ${{this.price}}</p>
+                <p>Descripción: {{this.description}}</p>
+                <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+            </div>
+        {{/each}}
+    </div>
+
+    <script>
+        async function addToCart(productId) {
+            const cartId = "ID_DEL_CARRITO"; // Reemplázalo con el ID real del carrito
+            await fetch(`/api/carts/${cartId}/products/${productId}`, { 
+                method: "POST"
+            });
+            alert("Producto agregado al carrito");
+        }
+    </script>
+</body>
+</html>
